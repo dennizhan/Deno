@@ -1,0 +1,113 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Arial', sans-serif;
+    background: url("../static/wallpaper.jpg");
+    background-size: cover;
+    overflow: hidden;
+}
+.container {
+    perspective: 1000px;
+    perspective-origin: center center;
+}
+.main-div {
+    width: 550px;
+    height: 250px;
+    border-radius: 20px;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    box-shadow:
+        0 20px 40px rgba(0,0,0,0.2),
+        0 0 0 1px rgba(255,255,255,0.1);
+    transition: transform 0.1s ease-out;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.main-div::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    transform: rotate(45deg);
+    transition: transform 0.6s ease;
+}
+.main-div:hover::before {
+    transform: rotate(45deg) translate(50%, 50%);
+}
+
+.music-div{
+    width: 550px;
+    height: 180px;
+    border-radius: 20px;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    box-shadow:
+        0 20px 40px rgba(0,0,0,0.2),
+        0 0 0 1px rgba(255,255,255,0.1);
+    transition: transform 0.1s ease-out;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin-top: 25px;
+}
+
+.music-icon {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    margin-left: 35px;
+}
+
+.music-title {
+    font-size: 28px;
+    margin-left:40px;
+}
+
+.main-div * {
+    z-index: 1;
+    position: relative;
+}
+.pfp {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    margin-top: 10px;
+}
+.title {
+    font-size: 28px;
+    margin-top: 10px;
+}
+.desc {
+    font-size: 18px;
+    font-weight: normal;
+    color: #cfcfcf;
+    padding-bottom: 10px;
+}
