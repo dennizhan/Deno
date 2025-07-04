@@ -58,10 +58,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const currentTimeSpan = document.getElementById('currentTime');
     const totalTimeSpan = document.getElementById('totalTime');
 
-    audio.play().catch(e => {
-        console.log('sound blocked:', e);
-    });
-
     // Function to format time (e.g., 65 seconds becomes 1:05)
     function formatTime(seconds) {
         const minutes = Math.floor(seconds / 60);
@@ -97,18 +93,13 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 const startScreen = document.getElementById('start-screen');
-const mainContent = document.getElementById('main-content');
 
 startScreen.addEventListener('click', () => {
     startScreen.classList.add('hidden');
-    mainContent.style.display = 'block';
-});
-
-document.getElementById("playBtn").addEventListener("click", function() {
     const audio = document.getElementById("audio");
 
     audio.play().catch((err) => {
-    console.error("Ses oynatılamadı:", err);
-    alert("Tarayıcı ses çalmaya izin vermedi.");
+        console.error("Ses oynatılamadı:", err);
+        alert("Tarayıcı ses çalmaya izin vermedi.");
     });
 });
