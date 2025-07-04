@@ -35,7 +35,6 @@ function updateRotation(e) {
 // Reset rotation when mouse leaves
 function resetRotation() {
     rotatingDiv.style.transform = `
-        perspective(1000px)
         rotateX(0deg)
         rotateY(0deg)
         translateZ(0px)
@@ -44,17 +43,21 @@ function resetRotation() {
 
 // Add event listeners only for the rotating div
 rotatingDiv.addEventListener('mouseenter', function() {
+    rotatingDiv.style.transition = 'none'; // Hover’da anında dönüş
     document.addEventListener('mousemove', updateRotation);
 });
 
 rotatingDiv.addEventListener('mouseleave', function() {
+    rotatingDiv.style.transition = 'transform 0.6s ease'; // Unhover’da yavaşça geri dön
     document.removeEventListener('mousemove', updateRotation);
     resetRotation();
 });
 
+const startScreen = document.getElementById('start-screen');
 
-document.addEventListener('DOMContentLoaded', function() {
-    const audio = document.getElementById('myAudio');
+startScreen.addEventListener('click', () => {
+    startScreen.classList.add('hidden');
+    const audio = document.getElementById("audio");
     const currentTimeSpan = document.getElementById('currentTime');
     const totalTimeSpan = document.getElementById('totalTime');
 
@@ -65,13 +68,16 @@ document.addEventListener('DOMContentLoaded', function() {
         return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
     }
 
-    // Event listener for when the audio metadata is loaded (to get total duration)
-    audio.addEventListener('loadedmetadata', function() {
-        totalTimeSpan.textContent = formatTime(audio.duration);
-        // Autoplay politikasından dolayı ilk başta çalmayabilir,
-        // ancak metadata yüklendiğinde süreyi gösterebiliriz.
+
+    audio.play().catch((err) => {
+        console.error("Ses oynatılamadı:", err);
+        alert("Tarayıcı ses çalmaya izin vermedi.");
     });
 
+    // Ses yüklenemediğinde veya oynatma engellendiğinde hata ayıklama için
+    audio.addEventListener('error', function(e) {
+        console.error("Müzik yüklenirken veya oynatılırken bir hata oluştu:", e);
+    });
     // Event listener for time updates
     audio.addEventListener('timeupdate', function() {
         const currentTime = audio.currentTime;
@@ -79,27 +85,19 @@ document.addEventListener('DOMContentLoaded', function() {
         currentTimeSpan.textContent = formatTime(currentTime);
     });
 
-    // Ses yüklenemediğinde veya oynatma engellendiğinde hata ayıklama için
-    audio.addEventListener('error', function(e) {
-        console.error("Müzik yüklenirken veya oynatılırken bir hata oluştu:", e);
-    });
-
-    // Tarayıcının autoplay politikaları nedeniyle bazen `play()`'i
-    // kullanıcı etkileşimi olmadan çağırmak başarısız olabilir.
-    // Ancak `autoplay` ve `loop` HTML'de olduğu için genellikle JavaScript tarafında
-    // manuel `play()` çağrısına gerek kalmaz.
-    // Eğer müzik hiç başlamazsa ve bu HTML'deki autoplay nedeniyle değilse,
-    // bir kullanıcı etkileşimi (örneğin bir tıklama) sonrası `audio.play()` deneyebilirsiniz.
 });
 
-const startScreen = document.getElementById('start-screen');
+const discordBtn = document.getElementById('discord-btn');
+const textToCopy = 'biliyor'; // buraya kopyalanacak metni yaz
 
-startScreen.addEventListener('click', () => {
-    startScreen.classList.add('hidden');
-    const audio = document.getElementById("audio");
+discordBtn.addEventListener('click', function(e) {
+  e.preventDefault(); // linkin normal tıklamasını engelle
 
-    audio.play().catch((err) => {
-        console.error("Ses oynatılamadı:", err);
-        alert("Tarayıcı ses çalmaya izin vermedi.");
+  navigator.clipboard.writeText(textToCopy)
+    .then(() => {
+      alert('Username copied to clipboard!'); // istersen burayı değiştir
+    })
+    .catch(() => {
+      alert('Copy failed!\nUsername: biliyor'); // kopyalama başarısız olursa 
     });
 });
