@@ -3,11 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Mouse-Following Div</title>
+    <title>hamza yapti 😜</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">    
 </head>
 <body>
     
+    <div id="start-screen">
+        <span ID="playBtn">Click to reveal</span>
+    </div>
+
     <div class="container">
         <div id="main">
             <div class="main-div">
@@ -20,6 +25,15 @@
             <div class="music-div">
             <img src="static/music.png" class="music-icon">
                 <div class="music-title">Anla artık çocuk</div>
+                <audio id="myAudio" autoplay loop>
+                    <source src="music.mp3" type="audio/mpeg">
+                    Tarayıcınız ses etiketini desteklemiyor.
+                </audio>
+
+                <div class="time-display">
+                    <span id="currentTime">0:00</span> / <span id="totalTime">0:00</span>
+                </div>
+
             </div>
         </div>
     </div>

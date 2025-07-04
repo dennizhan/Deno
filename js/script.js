@@ -52,10 +52,63 @@ rotatingDiv.addEventListener('mouseleave', function() {
     resetRotation();
 });
 
-// Add click effect
-rotatingDiv.addEventListener('click', function() {
-    this.style.transform += ' scale(0.95)';
-    setTimeout(() => {
-        this.style.transform = this.style.transform.replace(' scale(0.95)', '');
-    }, 150);
+
+document.addEventListener('DOMContentLoaded', function() {
+    const audio = document.getElementById('myAudio');
+    const currentTimeSpan = document.getElementById('currentTime');
+    const totalTimeSpan = document.getElementById('totalTime');
+
+    audio.play().catch(e => {
+        console.log('sound blocked:', e);
+    });
+
+    // Function to format time (e.g., 65 seconds becomes 1:05)
+    function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = Math.floor(seconds % 60);
+        return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+    }
+
+    // Event listener for when the audio metadata is loaded (to get total duration)
+    audio.addEventListener('loadedmetadata', function() {
+        totalTimeSpan.textContent = formatTime(audio.duration);
+        // Autoplay politikasından dolayı ilk başta çalmayabilir,
+        // ancak metadata yüklendiğinde süreyi gösterebiliriz.
+    });
+
+    // Event listener for time updates
+    audio.addEventListener('timeupdate', function() {
+        const currentTime = audio.currentTime;
+        // Update the current time display
+        currentTimeSpan.textContent = formatTime(currentTime);
+    });
+
+    // Ses yüklenemediğinde veya oynatma engellendiğinde hata ayıklama için
+    audio.addEventListener('error', function(e) {
+        console.error("Müzik yüklenirken veya oynatılırken bir hata oluştu:", e);
+    });
+
+    // Tarayıcının autoplay politikaları nedeniyle bazen `play()`'i
+    // kullanıcı etkileşimi olmadan çağırmak başarısız olabilir.
+    // Ancak `autoplay` ve `loop` HTML'de olduğu için genellikle JavaScript tarafında
+    // manuel `play()` çağrısına gerek kalmaz.
+    // Eğer müzik hiç başlamazsa ve bu HTML'deki autoplay nedeniyle değilse,
+    // bir kullanıcı etkileşimi (örneğin bir tıklama) sonrası `audio.play()` deneyebilirsiniz.
+});
+
+const startScreen = document.getElementById('start-screen');
+const mainContent = document.getElementById('main-content');
+
+startScreen.addEventListener('click', () => {
+    startScreen.classList.add('hidden');
+    mainContent.style.display = 'block';
+});
+
+document.getElementById("playBtn").addEventListener("click", function() {
+    const audio = document.getElementById("audio");
+
+    audio.play().catch((err) => {
+    console.error("Ses oynatılamadı:", err);
+    alert("Tarayıcı ses çalmaya izin vermedi.");
+    });
 });

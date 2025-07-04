@@ -83,11 +83,13 @@ body {
     border-radius: 50%;
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     margin-left: 35px;
+    margin-bottom: 170px;
 }
 
 .music-title {
     font-size: 28px;
-    margin-left:40px;
+    margin-left: 100px;
+    margin-top: -250px;
 }
 
 .main-div * {
@@ -110,4 +112,55 @@ body {
     font-weight: normal;
     color: #cfcfcf;
     padding-bottom: 10px;
+}
+
+.time-display {
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #cfcfcf;
+}
+
+/* Hide the default audio element */
+audio {
+    display: none;
+}
+
+.time-display {
+    color: #cfcfcf;
+    padding: 20px;
+    background-color: transparent;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+
+
+/* Başlangıç ekranı */
+#start-screen {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: #111;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    z-index: 9999;
+    cursor: pointer;
+    transition: opacity 0.5s ease;
+}
+
+#start-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#start-screen span {
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: transparent;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
 }
