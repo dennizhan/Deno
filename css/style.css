@@ -11,8 +11,6 @@ body {
     overflow: hidden;
 }
 
-
-
 .container {
     perspective: 1000px;
     perspective-origin: center center;
@@ -188,7 +186,6 @@ body {
     color: #cfcfcf;
 }
 
-/* Hide the default audio element */
 audio {
     display: none;
 }
@@ -202,9 +199,6 @@ audio {
     text-align: center;
 }
 
-
-
-/* Başlangıç ekranı */
 #start-screen {
     position: fixed;
     top: 0; left: 0;

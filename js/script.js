@@ -2,28 +2,18 @@
 const rotatingDiv = document.getElementById('main');
 const container = document.querySelector('.container');
 
-/*const path = "../static/";
-const randomNum = Math.floor((Math.random() * 2) + 1);
-const background = path + randomNum + '.jpg';
-
-document.body.style.backgroundImage = `url('${background}')`;*/
-
-// Get container bounds
 function updateRotation(e) {
     const rect = container.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
     
-    // Calculate mouse position relative to center
     const mouseX = e.clientX - centerX;
     const mouseY = e.clientY - centerY;
     
-    // Calculate rotation angles (limit the rotation for better effect)
-    const maxRotation = 10  ; // Maximum rotation in degrees
+    const maxRotation = 10  ; 
     const rotateX = (mouseY / (rect.height / 2)) * -maxRotation;
     const rotateY = (mouseX / (rect.width / 2)) * maxRotation;
     
-    // Apply the transformation
     rotatingDiv.style.transform = `
         perspective(1000px)
         rotateX(${rotateX}deg)
@@ -32,7 +22,6 @@ function updateRotation(e) {
     `;
 }
 
-// Reset rotation when mouse leaves
 function resetRotation() {
     rotatingDiv.style.transform = `
         rotateX(0deg)
@@ -41,14 +30,13 @@ function resetRotation() {
     `;
 }
 
-// Add event listeners only for the rotating div
 rotatingDiv.addEventListener('mouseenter', function() {
-    rotatingDiv.style.transition = 'none'; // Hover’da anında dönüş
+    rotatingDiv.style.transition = 'none'; 
     document.addEventListener('mousemove', updateRotation);
 });
 
 rotatingDiv.addEventListener('mouseleave', function() {
-    rotatingDiv.style.transition = 'transform 0.6s ease'; // Unhover’da yavaşça geri dön
+    rotatingDiv.style.transition = 'transform 0.6s ease'; 
     document.removeEventListener('mousemove', updateRotation);
     resetRotation();
 });
@@ -61,7 +49,6 @@ startScreen.addEventListener('click', () => {
     const currentTimeSpan = document.getElementById('currentTime');
     const totalTimeSpan = document.getElementById('totalTime');
 
-    // Function to format time (e.g., 65 seconds becomes 1:05)
     function formatTime(seconds) {
         const minutes = Math.floor(seconds / 60);
         const remainingSeconds = Math.floor(seconds % 60);
@@ -74,31 +61,28 @@ startScreen.addEventListener('click', () => {
         alert("Tarayıcı ses çalmaya izin vermedi.");
     });
 
-    // Ses yüklenemediğinde veya oynatma engellendiğinde hata ayıklama için
     audio.addEventListener('error', function(e) {
         console.error("Müzik yüklenirken veya oynatılırken bir hata oluştu:", e);
     });
-    // Event listener for time updates
     audio.addEventListener('timeupdate', function() {
         const currentTime = audio.currentTime;
-        // Update the current time display
         currentTimeSpan.textContent = formatTime(currentTime);
     });
 
 });
 
 const discordBtn = document.getElementById('discord-btn');
-const textToCopy = 'biliyor'; // buraya kopyalanacak metni yaz
+const textToCopy = 'biliyor';
 
 discordBtn.addEventListener('click', function(e) {
-  e.preventDefault(); // linkin normal tıklamasını engelle
+  e.preventDefault();
 
   navigator.clipboard.writeText(textToCopy)
     .then(() => {
-      alert('Username copied to clipboard!'); // istersen burayı değiştir
+      alert('Username copied to clipboard!');
     })
     .catch(() => {
-      alert('Copy failed!\nUsername: biliyor'); // kopyalama başarısız olursa 
+      alert('Copy failed!\nUsername: biliyor');
     });
 });
 
