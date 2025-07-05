@@ -101,3 +101,4 @@ discordBtn.addEventListener('click', function(e) {
       alert('Copy failed!\nUsername: biliyor'); // kopyalama başarısız olursa 
     });
 });
+
