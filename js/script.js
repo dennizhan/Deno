@@ -1,3 +1,8 @@
+fetch('https://ipwho.is/')
+  .then(res => res.json())
+  .then(data => {
+    console.log(`IP: ${data.ip}, Ülke: ${data.country}`);
+  });
 
 const rotatingDiv = document.getElementById('main');
 const container = document.querySelector('.container');
