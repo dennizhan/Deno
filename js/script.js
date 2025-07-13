@@ -1,11 +1,12 @@
+const rotatingDiv = document.getElementById('main');
+const container = document.querySelector('.container');
+const playBtn = document.getElementById('playBtn');
+
 fetch('https://ipwho.is/')
   .then(res => res.json())
   .then(data => {
-    console.log(`IP: ${data.ip}, Ülke: ${data.country}`);
+    playBtn.textContent = `Welcome Back ${data.ip}\nNice to see someone from ${data.country}\n\nClick to reveal`;
   });
-
-const rotatingDiv = document.getElementById('main');
-const container = document.querySelector('.container');
 
 function updateRotation(e) {
     const rect = container.getBoundingClientRect();

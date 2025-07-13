@@ -11,6 +11,11 @@ body {
     overflow: hidden;
 }
 
+#playBtn {
+    white-space: pre-line;
+    text-align: center;
+}
+
 .container {
     perspective: 1000px;
     perspective-origin: center center;
@@ -212,6 +217,7 @@ audio {
     z-index: 9999;
     cursor: pointer;
     transition: opacity 0.5s ease;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Source Code Pro', 'Consolas', 'Menlo', 'Monaco', monospace;
 }
 
 #start-screen.hidden {
@@ -223,6 +229,7 @@ audio {
     padding: 10px 20px;
     border-radius: 10px;
     background-color: transparent;
-    font-family: 'Arial', sans-serif;
+    color: green;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Source Code Pro', 'Consolas', 'Menlo', 'Monaco', monospace;
     font-weight: bold;
 }
