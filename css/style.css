@@ -6,7 +6,7 @@ body {
     justify-content: center;
     align-items: center;
     font-family: 'Arial', sans-serif;
-    background: url("../static/wallpaper.jpg");
+    background: url("../static/bg.gif");
     background-size: cover;
     overflow: hidden;
 }
